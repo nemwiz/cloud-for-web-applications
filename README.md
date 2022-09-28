@@ -1,4 +1,4 @@
-# Frontend cloud architecture workshop
+# Cloud for web applications workshop
 
 # Before the workshop
 
@@ -56,13 +56,13 @@ Note: For Windows and WSL2, checkout this repo somewhere on the WSL path e.g. `\
 
 To set up your dev environment, run below:
 
-`docker build -t frontend-cloud-workshop-dev-environment .`
+`docker build -t cloud-for-web-apps-dev-environment .`
 
-`docker run -d --name dev-env --mount type=bind,source="$PWD",target=/app --mount type=bind,source=/home/nemanja/.aws,target=/root/.aws -p 4444:3000 -p 4555:4200 frontend-cloud-workshop-dev-environment`
+`docker run -d --name dev-env --mount type=bind,source="$PWD",target=/app --mount type=bind,source=/home/nemanja/.aws,target=/root/.aws -p 4444:3000 -p 4555:4200 cloud-for-web-apps-dev-environment`
 
 For WSL2 and Windows run:
 
-`docker run -d --name dev-env --mount type=bind,source="$PWD",target=/app --mount type=bind,source=/mnt/c/Users/neni/.aws,target=/root/.aws -p 4444:3000 -p 4555:4200 frontend-cloud-workshop-dev-environment`
+`docker run -d --name dev-env --mount type=bind,source="$PWD",target=/app --mount type=bind,source=/mnt/c/Users/neni/.aws,target=/root/.aws -p 4444:3000 -p 4555:4200 cloud-for-web-apps-dev-environment`
 
 This command `docker exec -it dev-env /bin/bash` will open up the terminal inside your dev environment container.
 Run your commands from this terminal only as it has all the tools that are needed, you don't need to install anything.
