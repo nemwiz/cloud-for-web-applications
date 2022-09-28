@@ -1,0 +1,24 @@
+.user-actions-grid {
+  height: 50vh;
+  width: 80vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+}
+
+.user-action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #297373;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid #000;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.user-action-icon {
+  font-size: 40px;
+}
