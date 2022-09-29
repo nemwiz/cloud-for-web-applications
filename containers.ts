@@ -108,7 +108,7 @@ export const createDockerContainerDeployment = (appName: string) => {
             name: `${appEnvironment}-${appName}`, // A unique name for this environment. This name is used in the application URL
             application: app.name,
             solutionStackName:
-                "64bit Amazon Linux 2 v3.4.17 running Docker",
+                "64bit Amazon Linux 2 v3.4.19 running Docker",
             settings: [
                 // "Modify Security" in the console
                 {
