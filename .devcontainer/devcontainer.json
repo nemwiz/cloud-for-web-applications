@@ -3,5 +3,12 @@
     "dockerfile": "Dockerfile"
   },
   "features": {
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "workbench.colorTheme": "Visual Studio Light"
+      }
+    }
   }
 }

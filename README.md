@@ -4,15 +4,21 @@
 
 ## Prerequisite
 
-1. Install Docker
+1. Create a [Github account](https://github.com/)
 2. Set up an AWS account
 3. Create a [Pulumi account](https://app.pulumi.com/signin)
 
-## Installing Docker
+## Starting the dev environment
 
-Docker is free to use and install for [personal and education projects](https://www.docker.com/pricing/).
+We use [Github Codespaces](https://github.com/features/codespaces) for this workshop.
+To start your Github codespace:
 
-If you are running Windows, [please use WSL2](https://docs.docker.com/desktop/windows/install/) since it works much better on Windows.
+- Open up your browser and log in to Github
+- Click the green "Code" button
+- Click create codespace
+
+After a few moments, a new tab will open with VS code and our environment.
+Even though it runs in the browser, this environment behaves like you would run it on your local machine.
 
 ## Setting up the AWS account and user
 
@@ -48,40 +54,11 @@ You won't be able to access this page anymore
 
 ![Demo](./create-aws-user-demo.gif)
 
-## Starting the dev environment
-
-Note: Please adjust the paths to match your directories
-
-Note: For Windows and WSL2, checkout this repo somewhere on the WSL path e.g. `\\wsl$\` and mount the container from there.
-
-To set up your dev environment, run below:
-
-WSL2/Windows/MacOS:
-`docker build -t cloud-for-web-apps-dev-environment .`
-
-MacOS with M1 chipset:
-`docker build -t cloud-for-web-apps-dev-environment -f Dockerfile.m1 .`
-
-To start the container run below:
-
-`docker run -d --name dev-env --mount type=bind,source="$PWD",target=/app --mount type=bind,source=/home/nemanja/.aws,target=/root/.aws -p 4444:3000 -p 4555:4200 cloud-for-web-apps-dev-environment`
-
-For WSL2 and Windows run:
-
-`docker run -d --name dev-env --mount type=bind,source="$PWD",target=/app --mount type=bind,source=/mnt/c/Users/neni/.aws,target=/root/.aws -p 4444:3000 -p 4555:4200 cloud-for-web-apps-dev-environment`
-
-For MacOS with M1 chip:
-
-`docker run -d --name dev-env --mount type=bind,source="$PWD",target=/app --mount type=bind,source=/Users/wil/.aws,target=/root/.aws -p 4444:3000 -p 4555:4200 --platform linux/amd64 cloud-for-web-apps-dev-environment`
-
-This command `docker exec -it dev-env /bin/bash` will open up the terminal inside your dev environment container.
-Run your commands from this terminal only as it has all the tools that are needed, you don't need to install anything.
-
 ## Adding AWS profile
 
 You can also look at the video below.
 
-- Ensure you are running the terminal inside your Docker container
+- Open the terminal
 - Run `aws configure --profile <your-zuhlke-shortcode>-fe-workshop`
 - Follow the steps and copy the secret and access key from the `new_user_credentials.csv` file. See above step on creating AWS user
 - For region please key in `ap-southeast-1`
@@ -96,7 +73,8 @@ You can also look at the video below.
 - Log in to your Pulumi account
 - Click **Settings** and select **Access Tokens** in the left menu
 - Create a new token and store the token somewhere
-- Open the terminal inside your Docker container
+- Open the terminal
+- Run `npm install`
 - Run `pulumi login` and pass the token that we just created
 - Run `pulumi stack` and select **create new stack**
 - Name your stack `dev`
@@ -110,19 +88,28 @@ Our infrastructure is located in `index.ts`. To deploy it we need to run `pulumi
 
 ## Publishing the web app with Docker to ElasticBeanstalk
 
-This repo contains a handy script called `deploy-eb.sh`. This script will create a zip file called `web-app.zip`.
-The zip file then needs to be uploaded to ElasticBeanstalk via AWS console.
+- `chmod +x deploy-eb.sh`
+- `./deploy-eb.sh`
+
+This script will create a zip file called `web-app.zip`. The zip file then needs to be uploaded to ElasticBeanstalk via AWS console.
 
 ## Publishing the web app to S3
 
-This repo contains a handy script called `deploy-s3.sh`. This script will build your app and deploy it to the bucket.
+- `chmod +x deploy-s3.sh` 
+- `./deploy-s3.sh`
 
-## Running the web app locally
+This script will build your app and deploy it to the bucket.
 
-While inside the container `cd` into `app/src/web-app` and run `npm start`.
-Navigate to the app at `http://localhost:4444`
+## Running the web app
+
+`cd` into `src/web-app` and run `npm start`.
 
 ## Running the admin app locally
 
-While inside the container `cd` into `app/src/admin-app` and run `npm start`.
-Navigate to the app at `http://localhost:4555`
+`cd` into `src/admin-app` and run `npm start`.
+
+## Running the code in a local Docker environment
+
+To reduce effort in preparing the dev environment we use [Github Codespaces](https://github.com/features/codespaces).
+However, you can still run the environment on your local machine. Please read this [document](./local-dev-env/README.md) 
+on how to do that.
