@@ -1,5 +1,6 @@
 import * as aws from '@pulumi/aws';
 import {Bucket} from '@pulumi/aws/s3';
+import * as fs from 'fs';
 
 const FIVE_MINUTES = 30 * 10
 
@@ -10,7 +11,6 @@ export const createCloudfrontDistribution = (distributionName: string,
     const origins = adminAppBucket
         ? createMultipleOrigins(mainAppBucket, adminAppBucket)
         : createSingleOrigin(mainAppBucket);
-
 
     const distributionArgs: aws.cloudfront.DistributionArgs = {
         enabled: true,
@@ -46,11 +46,17 @@ export const createCloudfrontDistribution = (distributionName: string,
                 viewerProtocolPolicy: 'redirect-to-https',
                 forwardedValues: {
                     queryString: false,
-                    headers: ["Origin"],
+                    headers: ['Origin'],
                     cookies: {
-                        forward: "none",
+                        forward: 'none',
                     },
                 },
+                // functionAssociations: [
+                //     {
+                //         eventType: 'viewer-request',
+                //         functionArn: redirectFunction.arn.apply(arn => arn)
+                //     }
+                // ]
 
             }
         ] : [],
@@ -108,4 +114,13 @@ const createSingleOrigin = (mainAppBucket: Bucket) => {
             customOriginConfig: createOriginConfig(),
         }
     ]
+}
+
+const createCloudfrontFunction = (): aws.cloudfront.Function => {
+    return new aws.cloudfront.Function('spa-redirect-function', {
+        runtime: 'cloudfront-js-1.0',
+        comment: 'Function for redirecting in single page applications',
+        publish: true,
+        code: fs.readFileSync('./spa-redirect-function.js').toString(),
+    });
 }

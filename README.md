@@ -78,7 +78,9 @@ You can also look at the video below.
 - Run `pulumi login` and pass the token that we just created
 - Run `pulumi stack` and select **create new stack**
 - Name your stack `dev`
-- Configure Pulumi to use your AWS profile by running `export AWS_PROFILE=<your-zuhlke-shortcode>-fe-workshop`
+- Configure Pulumi to use your AWS profile by running and adapting the below command
+    - `echo export AWS_PROFILE=<your-zuhlke-shortcode>-fe-workshop >> ~/.bashrc`
+    - `source ~/.bashrc`
 
 ![Demo](./create-pulumi-access.gif)
 
