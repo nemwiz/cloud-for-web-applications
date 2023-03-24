@@ -12,6 +12,8 @@ export const createCloudfrontDistribution = (distributionName: string,
         ? createMultipleOrigins(mainAppBucket, adminAppBucket)
         : createSingleOrigin(mainAppBucket);
 
+    // const redirectFunction = createCloudfrontFunction();
+
     const distributionArgs: aws.cloudfront.DistributionArgs = {
         enabled: true,
 

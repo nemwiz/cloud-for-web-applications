@@ -14,8 +14,8 @@ We use [Github Codespaces](https://github.com/features/codespaces) for this work
 To start your Github codespace:
 
 - Open up your browser and log in to Github
-- Click the green "Code" button
-- Click create codespace
+- Click the green `Code` button and then the `Codespaces` tab
+- Click `Create codespace on main`
 
 After a few moments, a new tab will open with VS code and our environment.
 Even though it runs in the browser, this environment behaves like you would run it on your local machine.
@@ -40,16 +40,22 @@ You can also look at the video below.
 - Log in with the root user account (see above)
 - Go to IAM dashboard
 - Select **Users** on the left side and click **Add users** button in the top right
-- For username, please use the following convention **<your-Zuhlke-shortcode>-fe-workshop** e.g. *neni-fe-workshop*
-- Select both **Programmatic access** and **AWS Management Console access** options
-- You can untick the **Require password reset** box
+- For username, please use the following convention **<your-Zuhlke-shortcode>-cloud-workshop** e.g. *neni-cloud-workshop*
+- Select both **Provide user access to the AWS Management Console** and **I want to create an IAM user** options
+- You can untick the **Users must create a new password at next sign-in** box
 - Go to the next page
-- Select the **Attach existing policies** box
+- Select the **Attach policies directly** box
 - Search and select **AdministratorAccess**
 - Go to the next page
 - We won't be adding any tags so we can skip this one
 - Review the details and click the **Create user** button
-- **Important**: Download the `.csv` file with credentials and store it.
+- **Important**: Download the `.csv` file with credentials and store it. 
+You won't be able to access this page anymore
+- Click the newly created user and open the **Security credentials** tab
+- Scroll to the **Access keys** section and click **Create access key**
+- Select **Command line interface (CLI)** and check the recommendation box
+- We won't be adding any tags so we can skip this one
+- **Important**: Download the `.csv` file with the keys and store it. 
 You won't be able to access this page anymore
 
 ![Demo](./create-aws-user-demo.gif)
@@ -58,9 +64,9 @@ You won't be able to access this page anymore
 
 You can also look at the video below.
 
-- Open the terminal
-- Run `aws configure --profile <your-zuhlke-shortcode>-fe-workshop`
-- Follow the steps and copy the secret and access key from the `new_user_credentials.csv` file. See above step on creating AWS user
+- Open the terminal in your Github codespace
+- Run `aws configure --profile <your-zuhlke-shortcode>-cloud-workshop`
+- Follow the steps and copy the secret and access key from the `<your-zuhlke-shortcode>-cloud-workshop_accessKeys.csv` file. See above step on creating AWS user
 - For region please key in `ap-southeast-1`
 - For output name you can skip by pressing `Enter`
 
@@ -71,7 +77,7 @@ You can also look at the video below.
 You can also look at the video below.
 
 - Log in to your Pulumi account
-- Click **Settings** and select **Access Tokens** in the left menu
+- Click **Settings** and select **Personal access Tokens** in the top right menu
 - Create a new token and store the token somewhere
 - Open the terminal
 - Run `npm install`
@@ -79,14 +85,14 @@ You can also look at the video below.
 - Run `pulumi stack` and select **create new stack**
 - Name your stack `dev`
 - Configure Pulumi to use your AWS profile by running and adapting the below command
-    - `echo export AWS_PROFILE=<your-zuhlke-shortcode>-fe-workshop >> ~/.bashrc`
+    - `echo export AWS_PROFILE=<your-zuhlke-shortcode>-cloud-workshop >> ~/.bashrc`
     - `source ~/.bashrc`
 
 ![Demo](./create-pulumi-access.gif)
 
 ## Deploying the infrastructure 
 
-Our infrastructure is located in `index.ts`. To deploy it we need to run `pulumi up` command.
+Our infrastructure is located in `index.ts`. To deploy it we need to run `pulumi up --stack dev` command.
 
 ## Publishing the web app with Docker to ElasticBeanstalk
 
