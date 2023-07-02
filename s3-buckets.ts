@@ -38,6 +38,13 @@ const createPublicReadBucketPolicy = (policyName: string, s3Bucket: Bucket) => {
 export const createWebsiteBucket = (bucketName: string): Bucket => {
     const bucket = createBucket(`${bucketName}`);
     // Set the access policy for the bucket so all objects are readable
+    new aws.s3.BucketPublicAccessBlock(`${bucketName}-public-access-block`, {
+        bucket: bucket.id,
+        blockPublicAcls: false,
+        blockPublicPolicy: false,
+        ignorePublicAcls: false,
+        restrictPublicBuckets: false,
+    });
     createPublicReadBucketPolicy(`${bucketName}-bucket-policy`, bucket);
 
     return bucket;

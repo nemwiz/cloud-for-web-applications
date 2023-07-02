@@ -58,8 +58,6 @@ You won't be able to access this page anymore
 - **Important**: Download the `.csv` file with the keys and store it. 
 You won't be able to access this page anymore
 
-![Demo](./create-aws-user-demo.gif)
-
 ## Adding AWS profile
 
 You can also look at the video below.
@@ -121,3 +119,14 @@ This script will build your app and deploy it to the bucket.
 To reduce effort in preparing the dev environment we use [Github Codespaces](https://github.com/features/codespaces).
 However, you can still run the environment on your local machine. Please read this [document](./local-dev-env/README.md) 
 on how to do that.
+
+## Cleaning up resources
+
+- Run `chmod +x empty-s3-buckets.sh` 
+- Run `./empty-s3-buckets.sh`
+- Run `pulumi destroy`
+- Run `pulumi stack rm dev`
+- Remove Beanstalk bucket manually
+- Delete your Github codespace
+- Delete your Pulumi account
+- Log in as a root user to AWS and [close the AWS account](https://repost.aws/knowledge-center/close-aws-account)
