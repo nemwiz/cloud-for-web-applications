@@ -45,7 +45,7 @@ export const createWebsiteBucket = (bucketName: string): Bucket => {
         ignorePublicAcls: false,
         restrictPublicBuckets: false,
     });
-    createPublicReadBucketPolicy(`${bucketName}-bucket-policy`, bucket);
+    // createPublicReadBucketPolicy(`${bucketName}-bucket-policy`, bucket);
 
     return bucket;
 }
